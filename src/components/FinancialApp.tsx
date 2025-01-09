@@ -98,20 +98,20 @@ const FinancialApp = () => {
 
 		// Sort data
 		result.sort((a, b) => {
-			let compareA =
-				sortField === "date"
-					? new Date(a[sortField as keyof FinancialData] as string)
-					: a[sortField as keyof FinancialData];
-			let compareB =
-				sortField === "date"
-					? new Date(b[sortField as keyof FinancialData] as string)
-					: b[sortField as keyof FinancialData];
-
-			if (sortDirection === "asc") {
-				return compareA > compareB ? 1 : -1;
-			}
-			return compareA < compareB ? 1 : -1;
-		});
+            const compareA =
+                sortField === "date"
+                    ? new Date(a[sortField as keyof FinancialData] as string)
+                    : a[sortField as keyof FinancialData];
+            const compareB =
+                sortField === "date"
+                    ? new Date(b[sortField as keyof FinancialData] as string)
+                    : b[sortField as keyof FinancialData];
+        
+            if (sortDirection === "asc") {
+                return compareA > compareB ? 1 : -1;
+            }
+            return compareA < compareB ? 1 : -1;
+        });
 
 		setFilteredData(result);
 	}, [
@@ -126,23 +126,23 @@ const FinancialApp = () => {
 		sortDirection,
 	]);
 
-	const formatNumber = (num: any) => {
-		return new Intl.NumberFormat("en-US", {
-			style: "currency",
-			currency: "USD",
-			minimumFractionDigits: 0,
-			maximumFractionDigits: 0,
-		}).format(num);
-	};
-
-	const handleSort = (field: any) => {
-		if (sortField === field) {
-			setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-		} else {
-			setSortField(field);
-			setSortDirection("desc");
-		}
-	};
+	const formatNumber = (num: number) => {
+        return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(num);
+    };
+    
+    const handleSort = (field: string) => {
+        if (sortField === field) {
+            setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+        } else {
+            setSortField(field);
+            setSortDirection("desc");
+        }
+    };
 
 	if (loading)
 		return (
